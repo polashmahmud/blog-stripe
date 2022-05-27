@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Post;
 use App\Models\Profile;
 use App\Traits\ModelHelpers;
 use Laravel\Sanctum\HasApiTokens;
@@ -10,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -111,5 +113,15 @@ class User extends Authenticatable
     public function profile(): HasOne
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function posts()
+    {
+        return $this->postsRelation;
+    }
+
+    public function postsRelation(): HasMany
+    {
+        return $this->hasMany(Post::class, 'author_id');
     }
 }
