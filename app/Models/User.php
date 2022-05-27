@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Post;
 use App\Models\Profile;
+use App\Traits\HasAuthor;
 use App\Traits\ModelHelpers;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -23,6 +24,7 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use ModelHelpers;
+    use HasAuthor;
 
     const DEFAULT = 1;
     const MODERATOR = 2;
