@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Casts\TitleCast;
 use App\Traits\HasAuthor;
+use App\Traits\HasTags;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +13,7 @@ class Post extends Model
 {
     use HasFactory;
     use HasAuthor;
+    use HasTags;
 
     const TABLE = 'posts';
 
@@ -62,5 +64,11 @@ class Post extends Model
     public function coverImage(): string
     {
         return $this->cover_image;
+    }
+
+    public function delete()
+    {
+        $this->removeTags();
+        parent::delete();
     }
 }
